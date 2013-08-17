@@ -1,7 +1,7 @@
-﻿@model Core.Visitor[]
+﻿@model Core.Applicant[]
            
 <div style="text-align:left">
-<h3>Recent Visitors</h3>
+<h3>Recent Applicants</h3>
     @foreach (var visitor in ViewData.Model){
         @visitor.VisitDate @:-
         @visitor.IpAddress @:-

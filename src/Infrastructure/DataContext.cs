@@ -60,16 +60,16 @@ namespace Infrastructure
                     .Mappings(cfg =>
                               cfg.FluentMappings
                                   .AddFromAssembly(
-                                      typeof (VisitorMap)
+                                      typeof (ApplicantMap)
                                           .Assembly))
                     .BuildConfiguration();
         }
 
         private static void InitializeRepositories()
         {
-            Func<IVisitorRepository> builder =
-                () => new VisitorRepository();
-            VisitorRepositoryFactory.RepositoryBuilder =
+            Func<IApplicantRepository> builder =
+                () => new ApplicantRepository();
+            ApplicantRepositoryFactory.RepositoryBuilder =
                 builder;
         }
     }

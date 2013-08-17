@@ -88,8 +88,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="VisitorBuilder.cs" />
-    <Compile Include="VisitorRetrievalFilter.cs" />
+    <Compile Include="ApplicantBuilder.cs" />
+    <Compile Include="ApplicantRetrievalFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -159,7 +159,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\Visitors.cshtml" />
+    <Content Include="Views\Shared\Applicants.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,7 +14,7 @@
 
         <div id="header">
             <div id="title">
-                <h1>Iteration Zero</h1>
+                <h1>Distributed Onion Architecture</h1>
             </div>
 
             <div id="logindisplay">
@@ -36,8 +36,8 @@
             @RenderBody()
             <div id="footer">
             @{
-                var partialName = Constants.Partials.VISITORS;
-                var viewData = ViewData[Constants.ViewData.VISITORS];
+                var partialName = Constants.Partials.APPLICANTS;
+                var viewData = ViewData[Constants.ViewData.APPLICANTS];
             }
 
                 @Html.Partial(partialName, viewData)

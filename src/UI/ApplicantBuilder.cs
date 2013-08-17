@@ -4,25 +4,25 @@ using Core;
 
 namespace UI
 {
-	public class VisitorBuilder
+	public class ApplicantBuilder
 	{
 		private readonly HttpRequestBase _httpRequest;
 		private readonly DateTime _currentDate;
 
-		public VisitorBuilder(HttpRequestBase httpRequest, DateTime currentDate)
+		public ApplicantBuilder(HttpRequestBase httpRequest, DateTime currentDate)
 		{
 			_httpRequest = httpRequest;
 			_currentDate = currentDate;
 		}
 
-		public VisitorBuilder() : this(
+		public ApplicantBuilder() : this(
 			new HttpContextWrapper(HttpContext.Current).Request, DateTime.Now)
 		{
 		}
 
-		public Visitor BuildVisitor()
+		public Applicant BuildApplicant()
 		{
-			var visitor = new Visitor
+			var visitor = new Applicant
     		{
     			PathAndQuerystring = _httpRequest.Url.PathAndQuery,
     			Browser = _httpRequest.UserAgent,

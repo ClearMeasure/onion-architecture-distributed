@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public class Visitor
+    public class Applicant
     {
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }

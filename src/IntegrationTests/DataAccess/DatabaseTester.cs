@@ -20,7 +20,7 @@ namespace IntegrationTests.DataAccess
             using (var session = DataContext.GetSession())
             {
                 session.BeginTransaction();
-                session.CreateQuery("delete from Visitor").ExecuteUpdate();
+                session.CreateQuery("delete from Applicant").ExecuteUpdate();
                 session.Transaction.Commit();
             }
         }

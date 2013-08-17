@@ -4,12 +4,12 @@ namespace UI
 	{
 		public class Partials
 		{
-			public const string VISITORS = "Visitors";
+			public const string APPLICANTS = "Applicants";
 		}
 
 		public class ViewData
 		{
-			public const string VISITORS = "visitorsToDisplay";					
+			public const string APPLICANTS = "applicantsToDisplay";					
 		}
 	}
 }

@@ -2,24 +2,24 @@ using System;
 
 namespace Core
 {
-    public class VisitorRepositoryFactory
+    public class ApplicantRepositoryFactory
     {
         //meant to be set on application start
-        public static Func<IVisitorRepository>
+        public static Func<IApplicantRepository>
             RepositoryBuilder =
                 CreateDefaultRepositoryBuilder;
 
-        private static IVisitorRepository CreateDefaultRepositoryBuilder()
+        private static IApplicantRepository CreateDefaultRepositoryBuilder()
         {
             //throw if factory not initialized
             throw new Exception(
                 "No repository builder specified.");
         }
 
-        public IVisitorRepository BuildRepository()
+        public IApplicantRepository BuildRepository()
         {
-            //Uses the Func<IVisitorRepository> to build the instance
-            IVisitorRepository repository =
+            //Uses the Func<IApplicantRepository> to build the instance
+            IApplicantRepository repository =
                 RepositoryBuilder();
             return repository;
         }

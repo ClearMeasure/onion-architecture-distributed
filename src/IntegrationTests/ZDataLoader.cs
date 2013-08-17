@@ -16,7 +16,7 @@ namespace IntegrationTests
             using (var session = DataContext.GetSession())
             {
                 session.BeginTransaction();
-                session.SaveOrUpdate(new Visitor()
+                session.SaveOrUpdate(new Applicant()
                                          {
                                              Browser = "browser",
                                              IpAddress = "ip",

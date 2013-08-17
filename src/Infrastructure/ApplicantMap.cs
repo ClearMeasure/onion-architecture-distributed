@@ -3,12 +3,12 @@ using FluentNHibernate.Mapping;
 
 namespace Infrastructure
 {
-    public class VisitorMap : ClassMap<Visitor>
+    public class ApplicantMap : ClassMap<Applicant>
     {
-        public VisitorMap()
+        public ApplicantMap()
         {
             Not.LazyLoad();
-            Table("Visitor");
+            Table("Applicant");
             Id(x => x.Id).GeneratedBy.GuidComb();
             Map(x => x.PathAndQuerystring).Length(4000).Not.Nullable();
             Map(x => x.LoginName).Length(255).Not.Nullable();
@@ -25,7 +25,7 @@ namespace Infrastructure
 									namespace="Core"
 									assembly="Core">
 
-	<class name="Visitor" table="Visitors" >
+	<class name="Applicant" table="Visitors" >
 		<id name="Id" column="Id" type="Guid">
 			<generator class="guid.comb"/>
 		</id>

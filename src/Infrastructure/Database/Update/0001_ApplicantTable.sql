@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Visitor](
+﻿CREATE TABLE [dbo].[Applicant](
 	[Id] [uniqueidentifier] NOT NULL,
 	[PathAndQuerystring] [nvarchar](4000) NOT NULL,
 	[LoginName] [nvarchar](255) NOT NULL,

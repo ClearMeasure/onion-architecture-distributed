@@ -128,8 +128,8 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DataAccess\DatabaseTester.cs" />
-    <Compile Include="DataAccess\Mappings\VisitorMappingTester.cs" />
-    <Compile Include="DataAccess\VisitorRepositoryTester.cs" />
+    <Compile Include="DataAccess\Mappings\ApplicantMappingTester.cs" />
+    <Compile Include="DataAccess\ApplicantRepositoryTester.cs" />
     <Compile Include="ZDataLoader.cs" />
   </ItemGroup>
   <ItemGroup>

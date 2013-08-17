@@ -10,38 +10,38 @@ using NUnit.Framework;
 namespace IntegrationTests.DataAccess
 {
     [TestFixture]
-    public class VisitorRepositoryTester
+    public class ApplicantRepositoryTester
     {
         [Test]
         public void When_saving_should_write_to_database()
         {
             new DatabaseTester().Clean();
-            var visitor = CreateVisitor(Convert.ToDateTime("1/2/2345"));
+            var visitor = CreateApplicant(Convert.ToDateTime("1/2/2345"));
 
-            var repository = new VisitorRepository();
+            var repository = new ApplicantRepository();
             repository.Save(visitor);
 
-            Visitor loadedVisitor;
+            Applicant loadedApplicant;
             using (ISession session = DataContext.GetSession())
             {
-                loadedVisitor = session.Load<Visitor>(
+                loadedApplicant = session.Load<Applicant>(
                     visitor.Id);
             }
 
-            loadedVisitor.ShouldNotBeNull();
-            loadedVisitor.VisitDate.ToShortDateString().ShouldEqual("1/2/2345");
+            loadedApplicant.ShouldNotBeNull();
+            loadedApplicant.VisitDate.ToShortDateString().ShouldEqual("1/2/2345");
         }
 
         [Test]
-        public void Should_get_two_most_recent_visitors()
+        public void Should_get_two_most_recent_applicants()
         {
             new DatabaseTester().Clean();
-            Visitor visitor1 =
-                CreateVisitor(new DateTime(2000, 1, 1));
-            Visitor visitor2 =
-                CreateVisitor(new DateTime(2000, 1, 2));
-            Visitor visitor3 =
-                CreateVisitor(new DateTime(2000, 1, 3));
+            Applicant visitor1 =
+                CreateApplicant(new DateTime(2000, 1, 1));
+            Applicant visitor2 =
+                CreateApplicant(new DateTime(2000, 1, 2));
+            Applicant visitor3 =
+                CreateApplicant(new DateTime(2000, 1, 3));
             using (ISession session1 = DataContext.GetSession())
             {
                 session1.BeginTransaction();
@@ -51,20 +51,20 @@ namespace IntegrationTests.DataAccess
                 session1.Transaction.Commit();
             }
 
-            var repository = new VisitorRepository();
-            Visitor[] recentVisitors =
-                repository.GetRecentVisitors(2);
+            var repository = new ApplicantRepository();
+            Applicant[] recentApplicants =
+                repository.GetRecentApplicants(2);
 
-            recentVisitors.Length.ShouldEqual(2);
-            IEnumerable<Guid> idList = recentVisitors.Select(x => x.Id);
+            recentApplicants.Length.ShouldEqual(2);
+            IEnumerable<Guid> idList = recentApplicants.Select(x => x.Id);
             idList.Contains(visitor3.Id).ShouldBeTrue();
             idList.Contains(visitor2.Id).ShouldBeTrue();
             idList.Contains(visitor1.Id).ShouldBeFalse();
         }
 
-        private Visitor CreateVisitor(DateTime visitDate)
+        private Applicant CreateApplicant(DateTime visitDate)
         {
-            return new Visitor
+            return new Applicant
                        {
                            Browser = "1",
                            IpAddress = "2",
