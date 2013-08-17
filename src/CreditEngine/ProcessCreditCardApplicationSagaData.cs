@@ -1,7 +1,7 @@
 ﻿using System;
 using NServiceBus.Saga;
 
-namespace CreditEngineHost
+namespace CreditEngine
 {
     public class ProcessCreditCardApplicationSagaData : IContainSagaData
     {

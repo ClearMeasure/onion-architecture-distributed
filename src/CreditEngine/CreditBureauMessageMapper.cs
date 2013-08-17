@@ -1,6 +1,6 @@
 using CreditBureau.Commands;
 
-namespace CreditEngineHost
+namespace CreditEngine
 {
     public class CreditBureauMessageMapper
     {

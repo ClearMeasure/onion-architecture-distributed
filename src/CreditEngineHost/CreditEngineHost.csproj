@@ -53,12 +53,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CreditCardApplicationRepository.cs" />
-    <Compile Include="BusContext.cs" />
     <Compile Include="EndpointConfig.cs" />
-    <Compile Include="ProcessCreditCardApplicationSaga.cs" />
-    <Compile Include="ProcessCreditCardApplicationSagaData.cs" />
-    <Compile Include="CreditBureauMessageMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -80,6 +75,10 @@
     <ProjectReference Include="..\CreditBureau.Commands\CreditBureau.Commands.csproj">
       <Project>{16C754EA-E58C-4F8E-A1AB-631FCD9876A0}</Project>
       <Name>CreditBureau.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CreditEngine\CreditEngine.csproj">
+      <Project>{6db7e657-64e8-4c03-bf87-0dffcaa1a08f}</Project>
+      <Name>CreditEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

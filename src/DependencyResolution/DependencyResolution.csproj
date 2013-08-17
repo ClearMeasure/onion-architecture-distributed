@@ -62,19 +62,29 @@
       <Project>{929AF128-C08D-4332-B2E9-40AF56BD1538}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CreditEngineHost\CreditEngineHost.csproj">
-      <Project>{B1B85287-E51E-448F-9514-0967A107B07F}</Project>
-      <Name>CreditEngineHost</Name>
+    <ProjectReference Include="..\CreditEngine\CreditEngine.csproj">
+      <Project>{6DB7E657-64E8-4C03-BF87-0DFFCAA1A08F}</Project>
+      <Name>CreditEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{E84E9D61-2A0D-44A0-A10D-77B305A7D2D1}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\hibernate.cfg.xml">
+      <Link>Properties\hibernate.cfg.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y  ".\*.dll" "..\..\..\UI\bin\"
-xcopy /y  ".\*.dll" "..\..\..\StatusGateway\bin\$(ConfigurationName)"</PostBuildEvent>
+xcopy /y  ".\*.dll" "..\..\..\StatusGateway\bin\$(ConfigurationName)"
+xcopy /y  "..\..\..\hibernate.cfg.xml" "..\..\..\StatusGateway\bin\$(ConfigurationName)"
+xcopy /y  ".\*.dll" "..\..\..\TestHarness\bin\$(ConfigurationName)"
+xcopy /y  "..\..\..\Infrastructure\bin\$(ConfigurationName)\*.dll" "..\..\..\TestHarness\bin\$(ConfigurationName)"
+xcopy /y  "..\..\..\hibernate.cfg.xml" "..\..\..\TestHarness\bin\$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

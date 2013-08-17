@@ -1,5 +1,5 @@
 ﻿using System;
-using CreditEngine.Commands;
+using Core;
 using NServiceBus;
 
 namespace TestHarness
@@ -10,27 +10,37 @@ namespace TestHarness
 
         public void Run()
         {
-            while(true)
+            while (true)
             {
                 Console.Write("Press any key to send a credit card application");
                 Console.ReadLine();
-                Bus.Send(CreateCommand());  
+                SendCommand();
             }
-        }
-
-        private static ApplyForCreditCommand CreateCommand()
-        {
-            var command = new ApplyForCreditCommand(Guid.NewGuid());
-            command.ApplicantFirstName = "ApplicantFirstName";
-            command.ApplicantLastName = "ApplicantLastName";
-            command.ApplicantDateOfBirth = DateTime.Now;
-            command.ApplicantSocialSecurityNumber = "ApplicantSocialSecurityNumber";
-
-            return command;
         }
 
         public void Stop()
         {
+        }
+
+        private static void SendCommand()
+        {
+            var applicant = new Applicant
+            {
+                FirstName = "Jeffrey"
+                ,
+                PathAndQuerystring = ""
+                ,
+                LoginName = ""
+                ,
+                Browser = ""
+                ,
+                VisitDate = DateTime.Now
+                ,
+                IpAddress = ""
+            };
+            new ApplicantRepositoryFactory().BuildRepository().Save(applicant);
+            new CreditCardApplicationRepositoryFactory().BuildRepository()
+                .SaveApplicationFor(applicant);
         }
     }
 }

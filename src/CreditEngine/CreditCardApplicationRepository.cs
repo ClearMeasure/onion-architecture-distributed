@@ -3,7 +3,7 @@ using Core;
 using CreditEngine.Commands;
 using NServiceBus;
 
-namespace CreditEngineHost
+namespace CreditEngine
 {
     public class CreditCardApplicationRepository : ICreditCardApplicationRepository
     {

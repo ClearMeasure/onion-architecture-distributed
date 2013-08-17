@@ -5,7 +5,7 @@ using CreditEngine.Events;
 using NServiceBus;
 using NServiceBus.Saga;
 
-namespace CreditEngineHost
+namespace CreditEngine
 {
     public class ProcessCreditCardApplicationSaga : Saga<ProcessCreditCardApplicationSagaData>,
         IAmStartedByMessages<ApplyForCreditCommand>,

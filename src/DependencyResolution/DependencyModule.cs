@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Web;
 using Core;
-using CreditEngineHost;
+using CreditEngine;
 using Infrastructure;
+using NServiceBus;
 
 namespace DependencyResolution
 {
-    public class DependencyModule : IHttpModule, NServiceBus.IWantToRunAtStartup
+    public class DependencyModule : IHttpModule, IWantToRunAtStartup
     {
+        public IBus Bus { get; set; }
+
         public void Init(HttpApplication context)
         {
             context.BeginRequest += ContextBeginRequest;
@@ -17,23 +20,25 @@ namespace DependencyResolution
         {
         }
 
-        private void ContextBeginRequest(object sender,
-            EventArgs e)
-        {
-            Run();
-        }
-
         public void Run()
         {
             DataContext.EnsureStartup();
-            BusContext.EnsureStartup();
+            BusContext.SetOutsideBus(Bus);
             CreditCardApplicationRepositoryFactory.RepositoryBuilder =
                 () => new CreditCardApplicationRepository();
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+        }
+
+        private void ContextBeginRequest(object sender,
+            EventArgs e)
+        {
+            DataContext.EnsureStartup();
+            BusContext.EnsureWebStartup();
+            CreditCardApplicationRepositoryFactory.RepositoryBuilder =
+                () => new CreditCardApplicationRepository();
         }
     }
 }
