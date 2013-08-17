@@ -10,7 +10,7 @@ properties {
 	$projectConfig = "Release"
 	$base_dir = resolve-path .\
 	$source_dir = "$base_dir\src"
-    $nunitPath = "$source_dir\packages\NUnit.2.5.10.11092\Tools"
+    $nunitPath = "$source_dir\packages\NUnit.Runners.2.6.2\tools"
 	
 	$build_dir = "$base_dir\build"
 	$test_dir = "$build_dir\test"
@@ -20,19 +20,20 @@ properties {
 	
     $databaseName = $projectName
 	$databaseServer = "localhost\sqlexpress"
-	$databaseScripts = "$source_dir\Database"
-	$schemaDatabaseName = $databaseName + "_schema"
+	$databaseScripts = "$source_dir\Infrastructure\Database"
+    $hibernateConfig = "$source_dir\hibernate.cfg.xml"
 	
 	$connection_string = "server=$databaseserver;database=$databasename;Integrated Security=true;"
 	
 	$cassini_app = 'C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.EXE'
 	$port = 1234
+    $webapp_dir = "$source_dir\UI"
 }
 
 $framework = '4.0x86'
 
-task default -depends Test
-task ci -depends CommonAssemblyInfo, Test, Package
+task default -depends Init, CommonAssemblyInfo, Compile, RebuildDatabase, Test, LoadData
+task ci -depends Init, CommonAssemblyInfo, Compile, RebuildDatabase, Test, LoadData, Package
 
 task Init {
     delete_file $package_file
@@ -45,6 +46,7 @@ task Init {
 task ConnectionString {
 	$connection_string = "server=$databaseserver;database=$databasename;Integrated Security=true;"
 	write-host "Using connection string: $connection_string"
+    poke-xml $test_dir\hibernate.cfg.xml "//e:property[@name = 'connection.connection_string']" $connection_string @{"e" = "urn:nhibernate-configuration-2.2"}
 }
 
 task Compile -depends Init {
@@ -53,7 +55,7 @@ task Compile -depends Init {
     exec { & msbuild /t:build /v:q /nologo /p:Configuration=$projectConfig $source_dir\$projectName.sln }
 }
 
-task Test -depends Compile, PreTest, RebuildDatabase {
+task Test -depends PreTest, ConnectionString {
 	exec {
 		& $nunitPath\nunit-console.exe $test_dir\$unitTestAssembly $test_dir\$integrationTestAssembly /nologo /nodots /xml=$build_dir\TestResult.xml    
 	}
@@ -63,10 +65,16 @@ task PreTest {
 	copy_all_assemblies_for_test $test_dir
 }
 
-task RebuildDatabase -depends ConnectionString {
+task RebuildDatabase {
     exec { 
 		& $base_dir\tarantino\DatabaseDeployer.exe Rebuild $databaseServer $databaseName $databaseScripts 
 	}
+}
+
+task LoadData -depends ConnectionString, Compile, RebuildDatabase {
+    exec { 
+		& $nunitPath\nunit-console.exe $test_dir\$integrationTestAssembly /include=DataLoader /nologo /nodots /xml=$build_dir\DataLoadResult.xml
+    } "Build failed - data load failure"  
 }
 
 task CreateCompareSchema -depends Schema, RebuildDatabase {}
@@ -92,6 +100,7 @@ task CommonAssemblyInfo {
 
 task Package -depends Compile {
     delete_directory $package_dir
+    copy_website_files "$webapp_dir" "$package_dir\web" 
 	copy_files "$databaseScripts" "$package_dir\database"
 	
 	copy_files "$source_dir\CreditEngineHost\bin\$projectConfig" "$package_dir\CreditEngineHost"

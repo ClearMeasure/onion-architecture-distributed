@@ -1,0 +1,18 @@
+﻿@model Core.Visitor
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@if(TempData.Keys.Contains("message")){
+    <div id="message" class="message">@TempData["message"]</div>
+    <script type="text/javascript">
+        $("#message").fadeOut(2000);
+    </script>
+}
+<h2>@ViewBag.Message</h2>
+<p>
+    @using (Html.BeginForm()) {
+        @Html.EditorForModel();
+        <button type="submit" id="submit">Submit</button>
+    }
+</p>
