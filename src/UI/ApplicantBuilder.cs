@@ -28,7 +28,8 @@ namespace UI
     			Browser = _httpRequest.UserAgent,
     			IpAddress = _httpRequest.UserHostAddress,
     			LoginName = _httpRequest.LogonUserIdentity.Name,
-    			VisitDate = _currentDate
+    			VisitDate = _currentDate,
+                CreditCardApplicationId = Guid.NewGuid()
     		};
 			return visitor;
 		}

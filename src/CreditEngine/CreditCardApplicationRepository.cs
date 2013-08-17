@@ -9,7 +9,7 @@ namespace CreditEngine
     {
         public void SaveApplicationFor(Applicant applicant)
         {
-            var applyForCreditCommand = new ApplyForCreditCommand(Guid.NewGuid());
+            var applyForCreditCommand = new ApplyForCreditCommand(applicant.CreditCardApplicationId);
             applyForCreditCommand.ApplicantFirstName = applicant.FirstName;
             applyForCreditCommand.ApplicantLastName = applicant.LastName;
             applyForCreditCommand.ApplicantDateOfBirth = applicant.DateOfBirth;

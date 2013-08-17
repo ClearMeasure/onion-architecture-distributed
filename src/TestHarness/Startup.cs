@@ -26,6 +26,7 @@ namespace TestHarness
         {
             var applicant = new Applicant
             {
+                CreditCardApplicationId = Guid.NewGuid(),
                 FirstName = "Jeffrey"
                 ,
                 PathAndQuerystring = ""

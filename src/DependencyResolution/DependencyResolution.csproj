@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -79,8 +80,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y  ".\*.dll" "..\..\..\UI\bin\"
+    <PostBuildEvent>xcopy /y  ".\*.*" "..\..\..\UI\bin\"\
+xcopy /y  "..\..\..\CreditEngine\bin\$(ConfigurationName)\*.*" "..\..\..\UI\bin\"
+
 xcopy /y  ".\*.dll" "..\..\..\StatusGateway\bin\$(ConfigurationName)"
+xcopy /y  "..\..\..\Infrastructure\bin\$(ConfigurationName)\*.dll" "..\..\..\StatusGateway\bin\$(ConfigurationName)"
 xcopy /y  "..\..\..\hibernate.cfg.xml" "..\..\..\StatusGateway\bin\$(ConfigurationName)"
 xcopy /y  ".\*.dll" "..\..\..\TestHarness\bin\$(ConfigurationName)"
 xcopy /y  "..\..\..\Infrastructure\bin\$(ConfigurationName)\*.dll" "..\..\..\TestHarness\bin\$(ConfigurationName)"
