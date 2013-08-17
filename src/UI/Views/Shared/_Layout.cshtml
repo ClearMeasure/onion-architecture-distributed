@@ -36,8 +36,8 @@
             @RenderBody()
             <div id="footer">
             @{
-                var partialName = "Visitors";
-                var viewData = ViewData["Visitors"];
+                var partialName = Constants.Partials.VISITORS;
+                var viewData = ViewData[Constants.ViewData.VISITORS];
             }
 
                 @Html.Partial(partialName, viewData)
