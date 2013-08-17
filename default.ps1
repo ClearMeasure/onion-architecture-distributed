@@ -46,7 +46,7 @@ task Init {
 task ConnectionString {
 	$connection_string = "server=$databaseserver;database=$databasename;Integrated Security=true;"
 	write-host "Using connection string: $connection_string"
-    poke-xml $test_dir\hibernate.cfg.xml "//e:property[@name = 'connection.connection_string']" $connection_string @{"e" = "urn:nhibernate-configuration-2.2"}
+    poke-xml $hibernateConfig "//e:property[@name = 'connection.connection_string']" $connection_string @{"e" = "urn:nhibernate-configuration-2.2"}
 }
 
 task Compile -depends Init {
@@ -55,7 +55,7 @@ task Compile -depends Init {
     exec { & msbuild /t:build /v:q /nologo /p:Configuration=$projectConfig $source_dir\$projectName.sln }
 }
 
-task Test -depends PreTest, ConnectionString {
+task Test -depends ConnectionString, PreTest  {
 	exec {
 		& $nunitPath\nunit-console.exe $test_dir\$unitTestAssembly $test_dir\$integrationTestAssembly /nologo /nodots /xml=$build_dir\TestResult.xml    
 	}
