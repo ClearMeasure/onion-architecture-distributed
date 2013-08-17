@@ -7,7 +7,7 @@ properties {
     $unitTestAssembly = "UnitTests.dll"
     $integrationTestAssembly = "IntegrationTests.dll"
     $fullSystemTestAssembly = "FullSystemTests.dll"
-	$projectConfig = "Release"
+	$projectConfig = "Debug"
 	$base_dir = resolve-path .\
 	$source_dir = "$base_dir\src"
     $nunitPath = "$source_dir\packages\NUnit.Runners.2.6.2\tools"
@@ -113,8 +113,9 @@ task Package -depends Compile {
 }
 
 task FullSystemTests -depends Compile, RebuildDatabase {
-    &$cassini_app "/port:$port" "/path:$webapp_dir"
-    & $nunitPath\nunit-console-x86.exe $test_dir\$fullSystemTestAssembly /framework=net-4.0 /nologo /nodots /xml=$build_dir\FullSystemTestResult.xml
+    exec {&$cassini_app "/port:$port" "/path:$webapp_dir"}
+    exec {&$source_dir\CreditEngineHost\bin\$projectConfig\NServiceBus.Host.exe}
+    exec {& $nunitPath\nunit-console-x86.exe $test_dir\$fullSystemTestAssembly /framework=net-4.0 /nologo /nodots /xml=$build_dir\FullSystemTestResult.xml}
     exec { taskkill  /F /IM WebDev.WebServer40.EXE }
 }
  

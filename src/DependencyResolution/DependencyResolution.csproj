@@ -80,7 +80,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y  ".\*.*" "..\..\..\UI\bin\"\
+    <PostBuildEvent>xcopy /y  ".\*.*" "..\..\..\UI\bin\"
+xcopy /y  ".\*.dll" "..\..\..\UI\bin\"
 xcopy /y  "..\..\..\CreditEngine\bin\$(ConfigurationName)\*.*" "..\..\..\UI\bin\"
 
 xcopy /y  ".\*.dll" "..\..\..\StatusGateway\bin\$(ConfigurationName)"
