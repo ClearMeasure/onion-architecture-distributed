@@ -61,7 +61,7 @@ namespace CreditEngineHost
             Data.ApplicantSocialSecurityNumber = message.ApplicantSocialSecurityNumber;
         }
 
-        private static void LogDebugInfo(long id, IMessage message)
+        private static void LogDebugInfo(Guid id, IMessage message)
         {
             Console.WriteLine("Processing response {0}-{1}", id, message.GetType().Name);
         }

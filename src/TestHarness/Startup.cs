@@ -20,7 +20,7 @@ namespace TestHarness
 
         private static ApplyForCreditCommand CreateCommand()
         {
-            var command = new ApplyForCreditCommand(DateTime.Now.Millisecond);
+            var command = new ApplyForCreditCommand(Guid.NewGuid());
             command.ApplicantFirstName = "ApplicantFirstName";
             command.ApplicantLastName = "ApplicantLastName";
             command.ApplicantDateOfBirth = DateTime.Now;

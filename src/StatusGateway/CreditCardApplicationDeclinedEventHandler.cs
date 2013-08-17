@@ -1,10 +1,11 @@
 ﻿using System;
+using Core;
 using CreditEngine.Events;
 using NServiceBus;
 
 namespace StatusGateway
 {
-    public class AccountStatusChangedEventHandler : IHandleMessages<ICreditCardApplicationDeclinedEvent>
+    public class CreditCardApplicationDeclinedEventHandler : IHandleMessages<ICreditCardApplicationDeclinedEvent>
     {
         public void Handle(ICreditCardApplicationDeclinedEvent message)
         {

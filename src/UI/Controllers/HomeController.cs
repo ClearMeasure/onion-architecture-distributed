@@ -24,7 +24,10 @@ namespace UI.Controllers
             }
 
             new ApplicantRepositoryFactory().BuildRepository().Save(applicant);
-            TempData.Add("message", "Your visit has been logged.");
+            new CreditCardApplicationRepositoryFactory().BuildRepository()
+                .SaveApplicationFor(applicant);
+
+            TempData.Add("message", "Your application has been logged.");
             return RedirectToAction("index");
         }
     }

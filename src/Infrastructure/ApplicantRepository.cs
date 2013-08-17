@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Core;
 using NHibernate;
@@ -28,6 +29,15 @@ namespace Infrastructure
                         .ToArray();
 
                 return recentApplicants;
+            }
+        }
+
+        public Applicant GetApplicantByCreditCardApplicationId(Guid creditCardApplicationId)
+        {
+            using (ISession session = DataContext.GetSession())
+            {
+                Applicant applicant = session.Query<Applicant>().Single(x => x.CreditCardApplicationId == creditCardApplicationId);
+                return applicant;
             }
         }
     }

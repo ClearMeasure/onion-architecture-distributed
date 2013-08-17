@@ -1,10 +1,11 @@
-﻿using NServiceBus;
+﻿using System;
+using NServiceBus;
 
 namespace CreditEngine.Events
 {
     public interface ICreditCardApplicationDeclinedEvent : IMessage
     {
-        long CreditCardApplicationId { get; set; }
+        Guid CreditCardApplicationId { get; set; }
         string Reason { get; set; }
     }
 }

@@ -53,6 +53,8 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CreditCardApplicationRepository.cs" />
+    <Compile Include="BusContext.cs" />
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="ProcessCreditCardApplicationSaga.cs" />
     <Compile Include="ProcessCreditCardApplicationSagaData.cs" />
@@ -63,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{929af128-c08d-4332-b2e9-40af56bd1538}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CreditEngine.Commands\CreditEngine.Commands.csproj">
       <Project>{C5797EE2-43C0-4537-82E4-741B9D7B6756}</Project>
       <Name>CreditEngine.Commands</Name>

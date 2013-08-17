@@ -16,12 +16,17 @@ namespace Infrastructure
             Map(x => x.VisitDate).Not.Nullable();
             Map(x => x.IpAddress).Not.Nullable();
             Map(x => x.FirstName);
+
+            Map(x => x.CreditCardApplicationId);
+            Map(x => x.LastName);
+            Map(x => x.SocialSecurityNumber);
+            Map(x => x.CardNumberIssued);
         }
     }
 }
 
 /*<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+<hibernate-mapping xml'ns="urn:nhibernate-mapping-2.2"
 									namespace="Core"
 									assembly="Core">
 

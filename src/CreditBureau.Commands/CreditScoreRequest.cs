@@ -5,12 +5,12 @@ namespace CreditBureau.Commands
 {
     public class CreditScoreRequest : IMessage
     {
-        public CreditScoreRequest(long requestId)
+        public CreditScoreRequest(Guid requestId)
         {
             CreditCardApplicationId = requestId;
         }
 
-        public long CreditCardApplicationId { get; set; }
+        public Guid CreditCardApplicationId { get; set; }
         public string ApplicantFirstName { get; set; }
         public string ApplicantLastName { get; set; }
         public DateTime ApplicantDateOfBirth { get; set; }

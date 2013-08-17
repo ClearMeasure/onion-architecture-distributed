@@ -29,7 +29,11 @@ GO
 PRINT N'Altering [dbo].[Applicant]'
 GO
 ALTER TABLE [dbo].Applicant ADD
-[FirstName] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+	[FirstName] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	CreditCardApplicationId uniqueidentifier NULL,
+	LastName nvarchar(50) NULL,
+	SocialSecurityNumber nchar(9) NULL,
+	CardNumberIssued nchar(19) NULL
 GO
 IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
 GO

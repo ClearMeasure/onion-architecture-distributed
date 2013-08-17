@@ -14,7 +14,8 @@ namespace IntegrationTests.DataAccess.Mappings
         public void Should_map()
         {
             new DatabaseTester().Clean();
-            var visitor = new Applicant
+            Guid creditCardApplicationId = Guid.NewGuid();
+            var applicant = new Applicant
             {
                 Browser = "1",
                 IpAddress = "2",
@@ -22,16 +23,19 @@ namespace IntegrationTests.DataAccess.Mappings
                 PathAndQuerystring = "4",
                 VisitDate =
                     new DateTime(2000, 1, 1),
-                FirstName = "Jones"
+                FirstName = "Jones",
+                LastName = "Palermo",
+                CreditCardApplicationId = creditCardApplicationId,
+                CardNumberIssued = "1234"
             };
 
             var repository = new ApplicantRepository();
-            repository.Save(visitor);
+            repository.Save(applicant);
 
             Applicant loadedApplicant;
             using (ISession session = DataContext.GetSession())
             {
-                loadedApplicant = session.Load<Applicant>(visitor.Id);
+                loadedApplicant = session.Load<Applicant>(applicant.Id);
             }
 
             loadedApplicant.ShouldNotBeNull();
@@ -41,6 +45,9 @@ namespace IntegrationTests.DataAccess.Mappings
             loadedApplicant.PathAndQuerystring.ShouldEqual("4");
             loadedApplicant.VisitDate.ShouldEqual(new DateTime(2000, 1, 1));
             loadedApplicant.FirstName.ShouldEqual("Jones");
+            loadedApplicant.LastName.ShouldEqual("Palermo");
+            loadedApplicant.CreditCardApplicationId.ShouldEqual(creditCardApplicationId);
+            loadedApplicant.CardNumberIssued.ShouldEqual("1234");
         }
     }
 }

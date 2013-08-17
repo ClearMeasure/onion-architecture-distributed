@@ -5,7 +5,7 @@ namespace CreditEngine.Events
 {
     public interface ICreditCardCreatedEvent : IMessage
     {
-        long CreditCardApplicationId { get; set; }
+        Guid CreditCardApplicationId { get; set; }
         string CardNumber { get; set; }
     }
 }

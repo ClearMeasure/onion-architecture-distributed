@@ -92,7 +92,6 @@
     </Compile>
     <Compile Include="DataContext.cs" />
     <Compile Include="LogConfig.cs" />
-    <Compile Include="NHibernateModule.cs" />
     <Compile Include="ApplicantMap.cs" />
     <Compile Include="ApplicantRepository.cs" />
   </ItemGroup>

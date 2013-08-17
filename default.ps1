@@ -50,8 +50,10 @@ task ConnectionString {
 }
 
 task Compile -depends Init {
+    write-host "Cleaning"
     exec { & msbuild /t:clean /v:q /nologo /p:Configuration=$projectConfig $source_dir\$projectName.sln }
     delete_file $error_dir
+    write-host "Compiling"
     exec { & msbuild /t:build /v:q /nologo /p:Configuration=$projectConfig $source_dir\$projectName.sln }
 }
 
