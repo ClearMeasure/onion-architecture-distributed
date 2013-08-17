@@ -1,0 +1,5 @@
+﻿
+Usage: .\run_me.ps1 [psakeScriptFile] [outputDirectory]
+
+Graphviz's documentation can be found here: http://www.graphviz.org/Documentation.php
+The more interesting part of those docs is here: http://www.graphviz.org/doc/info/attrs.html#d:aspect
