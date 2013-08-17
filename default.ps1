@@ -39,6 +39,7 @@ task Init {
     delete_directory $build_dir
     create_directory $test_dir
 	create_directory $build_dir
+    Get-ChildItem $source_dir -include bin,obj -Recurse | foreach ($_) { write-host "deleting $_"; remove-item $_.fullname -Force -Recurse }
 }
 
 task ConnectionString {
